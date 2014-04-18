@@ -8,7 +8,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-
+/**
+ * AddBookWindow 은 도서를 등록하는 JPanel 클래스이다.
+ * @author songsh
+ *
+ */
 public class AddBookWindow extends JPanel implements ActionListener {
 	/**
 	 * 
