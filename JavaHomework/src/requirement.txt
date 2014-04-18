@@ -1,0 +1,23 @@
+Requirement
+1. Book class를 생성하세요 => 1회차
+1.1. data :
+String title
+String author
+String publishDate;
+1.2. method :
+void print() // Book의 내용을 출력
+
+2. JavaBookStore class를 생성하세요
+2.1. data :
+Book을 보관할수 있는 booklist를 만드세요.
+2.2. method : 아래의 메소드를 구현하세요
+addBook() // 도서 추가
+updateBook() // 도서 수정
+deleteBook() // 도서 삭제
+listBook() // 도서 목록
+rendBook() // 도서 대여
+returnBook() // 도서 반납
+
+3. main함수 에서 JavaBookStore 객체를 생성하고 도서 대여 시스템을 개발하세요. 
+
+4. Swing 을 이용한 윈도우 화면을 개발하세요. => 3회차
