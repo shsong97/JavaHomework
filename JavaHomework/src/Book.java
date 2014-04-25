@@ -1,3 +1,5 @@
+import java.io.Serializable;
+
 /**
  * 책 정보를 담고 있는 모델<br>
  * 책 정보를 등록시 대여점에서 부여한 고유 아이디가 있다.<br>
@@ -6,8 +8,12 @@
  * @author songsh
  *
  */
-public class Book
+public class Book implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8810852939226588983L;
 	// member variable define
 	/**
 	 * bookid - 등록일자(8자리) + "-" + 일련번호(2자리) 으로 채번한다. 
@@ -86,6 +92,7 @@ public class Book
 		msg+="\nBook ID : "+bookid;
 		msg+="\nTitle : "+title;
 		msg+="\nAuthor : "+author;
+		msg+="\nISBN : "+ISBN;
 		msg+="\nPublish Date : "+publishDate;
 		msg+="\nStatus : "+status;
 		msg+="\n********************";
@@ -97,9 +104,9 @@ public class Book
 		return ISBN;
 	}
 
-	public void setISBN(String iSBN) {
+	public void setISBN(String ISBN) {
 		// TODO ISBN 자리수 체크 13자리여야 한다. (예. 9788925550633, 9788952227829 )
-		ISBN = iSBN;
+		this.ISBN = ISBN;
 	}
 
 	public String getPubCompany() {
