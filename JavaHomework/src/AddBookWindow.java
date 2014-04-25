@@ -32,12 +32,15 @@ public class AddBookWindow extends JPanel implements ActionListener {
 	
 	JButton btnSubmit;
 	
-	BookStore bookstore;
+	BookStore bookstore; // 책정보를 control하는 클래스. 참조로 받는다.
 	public AddBookWindow(BookStore bookstore)
 	{
 		this.bookstore=bookstore;
 		createWindow();
 	}
+	/**
+	 * 화면을 생성한다.
+	 */
 	private void createWindow()
 	{
 		setLayout(new BorderLayout());
@@ -81,6 +84,9 @@ public class AddBookWindow extends JPanel implements ActionListener {
 		//pack();
 		setVisible(true);
 	}
+	/**
+	 * 도서정보를 등록한다.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		// TODO Auto-generated method stub

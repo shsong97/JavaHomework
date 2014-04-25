@@ -7,8 +7,10 @@ import java.io.ObjectOutputStream;
 
 public class BookStoreFile {
 
+	private String filename="d:\\test.txt";
 	public void Test()
 	{
+		// sample test
 		try {
 			Book b=new Book();
 			b.setBookid("20140425-01");
@@ -19,14 +21,14 @@ public class BookStoreFile {
 			b.setPublishDate("publishDate");
 			b.setStatus("status");
 			
-			FileOutputStream fileOut=new FileOutputStream("d:\\test.txt");
+			FileOutputStream fileOut=new FileOutputStream(filename);
 			ObjectOutputStream out=new ObjectOutputStream(fileOut);
 			out.writeObject(b);
 			out.close();
 			fileOut.close();
 			System.out.println("Serialized data");
 			
-			FileInputStream fileIn=new FileInputStream("d:\\test.txt");
+			FileInputStream fileIn=new FileInputStream(filename);
 			ObjectInputStream in=new ObjectInputStream(fileIn);
 			Book rbook=(Book)in.readObject();
 			in.close();
