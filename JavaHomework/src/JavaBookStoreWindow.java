@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -29,7 +31,7 @@ import javax.swing.UnsupportedLookAndFeelException;
  * @author songsh
  * @since 2014.04.04
  */
-public class JavaBookStoreWindow extends JFrame implements ActionListener,ItemListener  {
+public class JavaBookStoreWindow extends JFrame implements ActionListener,ItemListener,WindowListener {
 	/**
 	 * 
 	 */
@@ -77,8 +79,9 @@ public class JavaBookStoreWindow extends JFrame implements ActionListener,ItemLi
         setSize(1000, 600);
         setLocation(300,100);
         setResizable(true);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-
+        //setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        addWindowListener(this);
         // 메뉴 생성
         createMenu();
         
@@ -87,6 +90,9 @@ public class JavaBookStoreWindow extends JFrame implements ActionListener,ItemLi
         
         // 화면 보여줌
         setVisible(true);
+        
+        // 파일에 정보가 있으면 읽어온다.
+        bookstore.readBooks();
 	}
 	private void createPanel()
 	{
@@ -153,6 +159,11 @@ public class JavaBookStoreWindow extends JFrame implements ActionListener,ItemLi
         menuItem.addActionListener(this); // 이벤트 등록
         menu.add(menuItem);
         
+        menuItem = new JMenuItem("종료");
+        menuItem.setFont(font);
+        menuItem.addActionListener(this); // 이벤트 등록
+        menu.add(menuItem);
+        
         setJMenuBar(menuBar);
 	}
 	
@@ -193,6 +204,10 @@ public class JavaBookStoreWindow extends JFrame implements ActionListener,ItemLi
 		else if(command.equals("도서조회"))
 		{
 			// 과제.
+			this.remove(main);
+			main=new ListBookWindow(bookstore);
+			add(main);
+			this.validate();
 		}
 		else if(command.equals("도서대여"))
 		{
@@ -207,6 +222,12 @@ public class JavaBookStoreWindow extends JFrame implements ActionListener,ItemLi
 			HelpWindow j=new HelpWindow(command);
 			j.setSize(400,300);
 			j.setVisible(true);
+		}
+		else if(command.equals("대여점 사용방법"))
+		{
+			// 프로그램 종료시 파일에 쓰고 종료한다.
+			bookstore.writeBooks();
+			System.exit(0);
 		}
 	}
 	
@@ -247,6 +268,45 @@ public class JavaBookStoreWindow extends JFrame implements ActionListener,ItemLi
 			if(e.getActionCommand().equals("Close"));
 				dispose(); // 종료 버튼 클릭시 HelpWindow 종료
 		}
+		
+	}
+
+	@Override
+	public void windowActivated(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void windowClosed(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		System.out.println("windowClosed");
+	}
+	@Override
+	public void windowClosing(WindowEvent arg0) {
+		// TODO  프로그램 종료시 파일에 쓰고 종료한다.
+		System.out.println("windowClosing");
+		bookstore.writeBooks();
+		System.exit(0);
+		
+	}
+	@Override
+	public void windowDeactivated(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void windowDeiconified(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void windowIconified(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void windowOpened(WindowEvent arg0) {
+		// TODO Auto-generated method stub
 		
 	}
 }

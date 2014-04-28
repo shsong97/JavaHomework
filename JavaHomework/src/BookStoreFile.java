@@ -3,11 +3,57 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 
 
 public class BookStoreFile {
 
 	private String filename="d:\\test.txt";
+	public BookStoreFile()
+	{
+		
+	}
+	
+	public BookStoreFile(String filename)
+	{
+		this.filename=filename;
+	}
+	
+	public void writeBooks(ArrayList<Book> booklist)
+	{
+		try {
+			FileOutputStream fileOut=new FileOutputStream(filename);
+			ObjectOutputStream out=new ObjectOutputStream(fileOut);
+			out.writeObject(booklist);			
+			out.close();
+			fileOut.close();
+			//System.out.println("Serialized data");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	@SuppressWarnings("unchecked")
+	public ArrayList<Book> readBooks()
+	{
+		ArrayList<Book> booklist=null;
+		try {	
+			// file이 존재하지 않으면 skip
+			
+			
+			// file이 존재하면 object 읽기
+			FileInputStream fileIn=new FileInputStream(filename);
+			ObjectInputStream in=new ObjectInputStream(fileIn);
+			booklist=(ArrayList<Book>)in.readObject();
+			in.close();
+			fileIn.close();
+			//System.out.println("Desieialized data");
+		} catch (IOException | ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return booklist;
+	}
 	public void Test()
 	{
 		// sample test
@@ -41,9 +87,9 @@ public class BookStoreFile {
 		}
 	}
 	
-	public static void main(String[] args)
-	{
-		BookStoreFile file=new BookStoreFile();
-		file.Test();
-	}
+//	public static void main(String[] args)
+//	{
+//		BookStoreFile file=new BookStoreFile();
+//		file.Test();
+//	}
 }

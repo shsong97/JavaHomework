@@ -18,6 +18,22 @@ public class BookStore
 	 */
 	int maxbookid=0;
 	
+	public BookStore()
+	{
+		
+	}
+	public void readBooks()
+	{
+		BookStoreFile bookfile=new BookStoreFile();
+		booklist=bookfile.readBooks();
+		if(booklist==null)
+			booklist=new ArrayList<Book>();
+	}
+	public void writeBooks()
+	{
+		BookStoreFile bookfile=new BookStoreFile();
+		bookfile.writeBooks(booklist);
+	}
 	/**
 	 * bookid 채번
 	 * @return 신규로 추가시 부여할 책ID : 연도+월+일+"-"+항번2자리

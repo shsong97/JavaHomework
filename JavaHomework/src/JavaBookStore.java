@@ -15,12 +15,12 @@ public class JavaBookStore {
 	 * 3. 웹으로 구현<br>
 	 * @param args
 	 */
-//	public static void main(String[] args)
-//	{
-//		//1.Console 실행
-//		//new JavaBookStoreConsole().main();
-//		//2.Swing 실행
-//		new JavaBookStoreWindow();
-//	}
+	public static void main(String[] args)
+	{
+		//1.Console 실행
+		//new JavaBookStoreConsole().main();
+		//2.Swing 실행
+		new JavaBookStoreWindow();
+	}
 	
 }
