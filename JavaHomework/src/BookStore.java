@@ -17,22 +17,52 @@ public class BookStore
 	 * 책번호를 부여하기 위한 항번값
 	 */
 	int maxbookid=0;
+	String lastdate="";
 	
 	public BookStore()
 	{
 		
 	}
+	/**
+	 * book의 정보를 텍스트파일에서 읽어온다.
+	 */
 	public void readBooks()
 	{
 		BookStoreFile bookfile=new BookStoreFile();
 		booklist=bookfile.readBooks();
 		if(booklist==null)
+		{
+			// 없으면 초기화
 			booklist=new ArrayList<Book>();
+			this.lastdate="";
+			this.maxbookid=0;
+		}
+		else
+		{
+			// 마지막으로 저장된 일자와 번호를 읽어서 오늘과 다르면 bookid를 처음부터 다시 셋팅한다.
+			Calendar c=Calendar.getInstance();
+			int year=c.get(Calendar.YEAR);
+			int month=c.get(Calendar.MONTH)+1;
+			int date=c.get(Calendar.DATE);
+			
+			String today=new Integer(year).toString() + String.format("%02d",month) + String.format("%02d",date);
+			
+			this.lastdate=bookfile.lastdate;
+			this.maxbookid=bookfile.maxbookid;
+			if(!lastdate.equals(today))
+			{
+				this.lastdate=today;
+				this.maxbookid=0;
+			}
+		}
 	}
+	/**
+	 * book의 정보를 텍스트파일에 쓴다.
+	 */
 	public void writeBooks()
 	{
 		BookStoreFile bookfile=new BookStoreFile();
-		bookfile.writeBooks(booklist);
+		bookfile.writeBooks(lastdate,maxbookid,booklist);
 	}
 	/**
 	 * bookid 채번
@@ -46,10 +76,14 @@ public class BookStore
 		int month=c.get(Calendar.MONTH)+1;
 		int date=c.get(Calendar.DATE);
 		
-		String today=new Integer(year).toString() + String.format("%02d",month) + String.format("%02d",date);
-		String bookid=today+"-"+ String.format("%02d", (maxbookid+1));
+		lastdate=new Integer(year).toString() + String.format("%02d",month) + String.format("%02d",date);
+		String bookid=lastdate+"-"+ String.format("%02d", (maxbookid+1));
 		return bookid;
 	}
+	/**
+	 * booklist 객체를 반환한다.
+	 * @return
+	 */
 	public ArrayList<Book> getBookList()
 	{
 		return booklist;

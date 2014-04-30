@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -9,6 +10,9 @@ import java.util.ArrayList;
 public class BookStoreFile {
 
 	private String filename="d:\\test.txt";
+	String lastdate="";
+	int maxbookid=0;
+	
 	public BookStoreFile()
 	{
 		
@@ -19,12 +23,14 @@ public class BookStoreFile {
 		this.filename=filename;
 	}
 	
-	public void writeBooks(ArrayList<Book> booklist)
+	public void writeBooks(String lastdate,int maxbookid,ArrayList<Book> booklist)
 	{
 		try {
 			FileOutputStream fileOut=new FileOutputStream(filename);
 			ObjectOutputStream out=new ObjectOutputStream(fileOut);
-			out.writeObject(booklist);			
+			out.writeObject(lastdate);
+			out.writeObject(maxbookid);
+			out.writeObject(booklist);// booklist 객체를 저장한다.
 			out.close();
 			fileOut.close();
 			//System.out.println("Serialized data");
@@ -39,14 +45,19 @@ public class BookStoreFile {
 		ArrayList<Book> booklist=null;
 		try {	
 			// file이 존재하지 않으면 skip
+			File file=new File(filename);
 			
-			
-			// file이 존재하면 object 읽기
-			FileInputStream fileIn=new FileInputStream(filename);
-			ObjectInputStream in=new ObjectInputStream(fileIn);
-			booklist=(ArrayList<Book>)in.readObject();
-			in.close();
-			fileIn.close();
+			if(file.exists())
+			{
+				// file이 존재하면 object 읽기
+				FileInputStream fileIn=new FileInputStream(filename);
+				ObjectInputStream in=new ObjectInputStream(fileIn);
+				lastdate=(String)in.readObject();
+				maxbookid=(int)in.readObject();
+				booklist=(ArrayList<Book>)in.readObject();
+				in.close();
+				fileIn.close();
+			}
 			//System.out.println("Desieialized data");
 		} catch (IOException | ClassNotFoundException e) {
 			// TODO Auto-generated catch block

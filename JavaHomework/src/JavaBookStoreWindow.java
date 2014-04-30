@@ -223,7 +223,7 @@ public class JavaBookStoreWindow extends JFrame implements ActionListener,ItemLi
 			j.setSize(400,300);
 			j.setVisible(true);
 		}
-		else if(command.equals("대여점 사용방법"))
+		else if(command.equals("종료"))
 		{
 			// 프로그램 종료시 파일에 쓰고 종료한다.
 			bookstore.writeBooks();

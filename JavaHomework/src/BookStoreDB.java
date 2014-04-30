@@ -28,7 +28,6 @@ public class BookStoreDB {
 			String dbPass = "DB비밀번호"; //DB비밀번호
 			conn = DriverManager.getConnection(jdbcDriver, dbUser, dbPass); 
 			System.out.println("Connection Open");
-			conn.close(); 
 		} catch(ClassNotFoundException e) {
 			System.out.println("ClassNotFoundException"); 
 			e.printStackTrace();
