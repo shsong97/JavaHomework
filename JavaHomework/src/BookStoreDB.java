@@ -69,7 +69,7 @@ public class BookStoreDB {
 	}
 	/**
 	 * sample code를 넣어서 테스트하는 함수
-	 * sql문을 적당히 수정하여 테스트하세요.
+	 * sql문을 수정하여 테스트하세요.
 	 */
 	public void Test()
 	{

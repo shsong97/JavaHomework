@@ -200,6 +200,10 @@ public class JavaBookStoreWindow extends JFrame implements ActionListener,ItemLi
 		else if(command.equals("도서삭제"))
 		{
 			// 과제.
+			this.remove(main);
+			main=new DeleteBookWindow(bookstore);
+			add(main);
+			this.validate();
 		}
 		else if(command.equals("도서조회"))
 		{
@@ -212,10 +216,18 @@ public class JavaBookStoreWindow extends JFrame implements ActionListener,ItemLi
 		else if(command.equals("도서대여"))
 		{
 			// 과제.
+			this.remove(main);
+			main=new RentBookWindow(bookstore);
+			add(main);
+			this.validate();
 		}
 		else if(command.equals("도서반납"))
 		{
 			// 과제.
+			this.remove(main);
+			main=new ReturnBookWindow(bookstore);
+			add(main);
+			this.validate();
 		}
 		else if(command.equals("대여점 사용방법"))
 		{
@@ -225,6 +237,7 @@ public class JavaBookStoreWindow extends JFrame implements ActionListener,ItemLi
 		}
 		else if(command.equals("종료"))
 		{
+			// 과제.
 			// 프로그램 종료시 파일에 쓰고 종료한다.
 			bookstore.writeBooks();
 			System.exit(0);
